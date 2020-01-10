@@ -4,7 +4,8 @@ const user = express.Router();
 
 user
   .get('/', function(req, res){
-      res.render('chat');
+      console.log(req.session);
+      res.render('user_list');
   });
 
 module.exports = user;

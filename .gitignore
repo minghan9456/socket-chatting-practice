@@ -1,2 +1,4 @@
 node_modules/
 config/constant.js
+
+.*.swp

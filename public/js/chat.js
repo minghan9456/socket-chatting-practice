@@ -44,7 +44,8 @@ var CHAT = (function() {
 
           var msgData = {
             content : $('#m').val(),
-            user : profile.name
+            user : profile.name,
+            datetime : getDatetime(),
           }
 
           socket.emit('chat message', msgData);
@@ -52,13 +53,12 @@ var CHAT = (function() {
           return false;
         });
         socket.on('chat message', function(msg){
-          let text = "[" + getDateTime() + "] " + profile.name + " : " + msg;
-          $('#messages').append($('<li>').text(text));
+          $('#messages').append($('<li>').text(msg));
           window.scrollTo(0, document.body.scrollHeight);
         });
       });
 
-      function getDateTime() {
+      function getDatetime() {
         let today = new Date();
         let date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
         let time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
