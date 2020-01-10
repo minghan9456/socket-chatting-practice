@@ -4,7 +4,7 @@ const user = express.Router();
 
 user
   .get('/', function(req, res){
-      res.sendFile('/var/www/sayhi.mjohnh.com/chat.html');
+      res.render('chat');
   });
 
 module.exports = user;

@@ -30,6 +30,25 @@ class UserModel {
     }
   }
 
+  async find(userId) {
+    let conn;
+    try {
+      conn = await this.pool.getConnection();
+
+      var sql = "SELECT * FROM user WHERE idx = ? LIMIT 1";
+
+      var rows = await conn.query(sql, [userId]);
+      await conn.close();
+
+      return rows;
+
+    } catch (err) {
+      throw err;
+    } finally {
+      if (conn) conn.end();
+    }
+  }
+
   async get(skip, limit) {
     let conn;
     try {

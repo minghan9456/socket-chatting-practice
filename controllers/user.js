@@ -20,16 +20,27 @@ class UserController {
 
   static async login(req, res) {
     try {
-      let payload = await UserService.upsert(req);
+      let payload = {};
+
+      var userData = await UserService.login(req);
+      if (userData.length) {
+        req.session.user_id = userData[0].idx;
+        req.session.is_admin = userData[0].is_admin;
+
+        payload.user_id = userData.idx;
+      }
+
       res.send(payload);
     } catch(exception) {
+      //console.log(exception);
       res.status(500).send(exception)
     }
   }
 
   static async update(req, res) {
     try {
-      console.log(req.params);
+      //console.log(req.params);
+      //console.log(req.session);
       //let payload = await UserService.upsert(req);
       res.send({});
     } catch(exception) {

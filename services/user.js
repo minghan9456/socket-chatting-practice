@@ -15,7 +15,7 @@ class UserService {
 
   }
 
-  static async upsert(req) {
+  static async login(req) {
     // upsert
     let datetime = getDatetime();
 
@@ -30,9 +30,8 @@ class UserService {
 
     var User = new UserModel(pool)
     let insertId = await User.upsert(userData);
-    return {
-      insert_id : insertId
-    };
+
+    return await User.find(insertId);
   }
 
   static async update(req) {

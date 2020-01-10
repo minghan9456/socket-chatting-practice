@@ -22,10 +22,15 @@ app.listen(constant.PORT, function(){
 */
 
 var express = require("express");
-//var session = require('express-session');
+var session = require('express-session');
+var cookieParser = require('cookie-parser');
 const app = express();
 
+app.use(cookieParser());
+app.use(session({secret: "25hrjkdsanfukhfjdksa"}));
 app.use(express.json());
+
+app.set('view engine', 'ejs');
 
 /*
 var http = require('http').Server(app);

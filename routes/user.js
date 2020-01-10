@@ -5,6 +5,6 @@ const user = express.Router();
 user
   .get('/list', uesrCtrl.list)
   .post('/login', uesrCtrl.login)
-  .put('/:userId', uesrCtrl.login)
+  .get('/:userId', uesrCtrl.update)
 
 module.exports = user;
