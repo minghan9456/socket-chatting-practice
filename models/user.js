@@ -30,14 +30,33 @@ class UserModel {
     }
   }
 
-  async find(userId) {
+  async update(user_id, data) {
+    let conn;
+    try {
+      conn = await this.pool.getConnection();
+
+      var sql = "UPDATE `user` SET `is_admin`= ?,`updated_at`= ? WHERE idx = ?";
+
+      var rows = await conn.query(sql, [data.is_admin, data.updated_at, user_id]);
+      await conn.close();
+
+      return rows;
+
+    } catch (err) {
+      throw err;
+    } finally {
+      if (conn) conn.end();
+    }
+  }
+
+  async find(user_id) {
     let conn;
     try {
       conn = await this.pool.getConnection();
 
       var sql = "SELECT * FROM user WHERE idx = ? LIMIT 1";
 
-      var rows = await conn.query(sql, [userId]);
+      var rows = await conn.query(sql, [user_id]);
       await conn.close();
 
       return rows;

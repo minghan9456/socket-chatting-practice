@@ -1,6 +1,7 @@
 const UserService = require('../services/user');
 
 class UserController {
+  // errorcode
 
   static test(req, res) {
       var payload = {
@@ -11,7 +12,11 @@ class UserController {
 
   static async list(req, res) {
     try {
-      let payload = await UserService.listUser(req);
+      var payload = [];
+
+      if (req.session.user_id != null && req.session.is_admin) {
+        payload = await UserService.listUser(req);
+      }
       res.send(payload);
     } catch(exception) {
       res.status(500).send(exception)
@@ -20,14 +25,16 @@ class UserController {
 
   static async login(req, res) {
     try {
-      let payload = {};
+      var payload = {};
 
       var userData = await UserService.login(req);
       if (userData.length) {
         req.session.user_id = userData[0].idx;
         req.session.is_admin = userData[0].is_admin;
 
-        payload.user_id = userData.idx;
+        payload.user_id = userData[0].idx;
+        payload.user_name = userData[0].name;
+        payload.is_admin = userData[0].is_admin;
       }
 
       res.send(payload);
@@ -39,10 +46,13 @@ class UserController {
 
   static async update(req, res) {
     try {
-      //console.log(req.params);
-      //console.log(req.session);
-      //let payload = await UserService.upsert(req);
-      res.send({});
+      var payload = {};
+
+      if (req.session.user_id != null && req.session.is_admin && req.params.user_id) {
+        payload = await UserService.update(req);
+      }
+
+      res.send(payload);
     } catch(exception) {
       res.status(500).send(exception)
     }

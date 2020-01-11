@@ -6,6 +6,7 @@ class UserService {
   static async listUser(req) {
     //const skip = Number(req.query.skip) || 0;
     //const limit = req.query.limit || PAGE_SIZE;
+    //TODO
     const skip = 0;
     const limit = 0;
 
@@ -16,7 +17,6 @@ class UserService {
   }
 
   static async login(req) {
-    // upsert
     let datetime = getDatetime();
 
     let userData = {
@@ -35,7 +35,17 @@ class UserService {
   }
 
   static async update(req) {
-    //check isadmin
+    //console.log("here", req.session, req.params);
+
+    var User = new UserModel(pool)
+
+    let datetime = getDatetime();
+    let updateData = {
+      is_admin : req.body.is_admin,
+      "updated_at" : datetime, 
+    }
+
+    return await User.update(req.params.user_id, updateData);
   }
 }
 
