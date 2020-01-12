@@ -1,4 +1,6 @@
-module.exports = function(app, constant) {
+const constant = require('../config/constant');
+
+module.exports = function(app) {
   app.use('/api/user', require('./user.api.routes'));
 
   app.use('/user', require('./user.routes'));

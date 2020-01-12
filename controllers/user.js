@@ -1,13 +1,13 @@
 const UserService = require('../services/user');
 
 class UserController {
-  // errorcode
+  // TODO errorcode
 
   static test(req, res) {
-      var payload = {
-        test : "ok"
-      }
-      res.send(payload);
+    var payload = {
+      test: 'ok',
+    };
+    res.send(payload);
   }
 
   static async list(req, res) {
@@ -18,8 +18,8 @@ class UserController {
         payload = await UserService.listUser(req);
       }
       res.send(payload);
-    } catch(exception) {
-      res.status(500).send(exception)
+    } catch (exception) {
+      res.status(500).send(exception);
     }
   }
 
@@ -38,9 +38,9 @@ class UserController {
       }
 
       res.send(payload);
-    } catch(exception) {
+    } catch (exception) {
       //console.log(exception);
-      res.status(500).send(exception)
+      res.status(500).send(exception);
     }
   }
 
@@ -48,13 +48,17 @@ class UserController {
     try {
       var payload = {};
 
-      if (req.session.user_id != null && req.session.is_admin && req.params.user_id) {
+      if (
+        req.session.user_id != null &&
+        req.session.is_admin &&
+        req.params.user_id
+      ) {
         payload = await UserService.update(req);
       }
 
       res.send(payload);
-    } catch(exception) {
-      res.status(500).send(exception)
+    } catch (exception) {
+      res.status(500).send(exception);
     }
   }
 }

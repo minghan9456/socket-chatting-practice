@@ -6,6 +6,6 @@ user
   .get('/list', uesrCtrl.list)
   .post('/login', uesrCtrl.login)
   .post('/logout', uesrCtrl.login)
-  .post('/:user_id', uesrCtrl.update)
+  .post('/:user_id', uesrCtrl.update);
 
 module.exports = user;

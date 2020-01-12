@@ -1,11 +1,12 @@
+const constant = require('../config/constant');
 const mariadb = require('mariadb');
+
 var pool = mariadb.createPool({
-  host: 'localhost', 
-  database: 'chat_service',
-  //database: 'map_source',
-  user:'mage', 
-  password: 'sacUenfcggLrS5CJ',
-  connectionLimit: 5
+  host: constant.MYSQL_HOST,
+  database: constant.MYSQL_DATABASE,
+  user: constant.MYSQL_USER,
+  password: constant.MYSQL_PASSWORD,
+  connectionLimit: 5,
 });
 
 module.exports = pool;
