@@ -1,6 +1,6 @@
 # sayhi - simple socket chat room
 
-### Installing
+### Set up
 
 1. git clone project
 ```
