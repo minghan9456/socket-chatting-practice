@@ -37,7 +37,9 @@ var USER_LIST = (function() {
       }),
       success: function(ret) {
         console.log(ret);
-        location.reload();
+        if (ret.errcode == 0) {
+          location.reload();
+        }
       },
     });
 
@@ -51,10 +53,13 @@ var USER_LIST = (function() {
       success: function(ret) {
         console.log(ret);
         initBody();
-        renderBody(ret);
 
-        newItemDomCache();
-        newItemDomFuncBinding();
+        if (ret.errcode == 0) {
+          renderBody(ret.result);
+
+          newItemDomCache();
+          newItemDomFuncBinding();
+        }
       },
     });
   }

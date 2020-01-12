@@ -19,9 +19,11 @@ function onSignIn(googleUser) {
       google_token: id_token,
     }),
     success: function(ret) {
-      CHAT.init(ret);
+      if (ret.errcode == 0) {
+        CHAT.init(ret.result);
 
-      CHAT.renderAdminTool(ret);
+        CHAT.renderAdminTool();
+      }
     },
   });
 }
