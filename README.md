@@ -19,9 +19,13 @@ $ cp ./config/constant.example.js ./config/constant.js
 
 4. Follow [google sign in guide](https://developers.google.com/identity/sign-in/web/sign-in) to get google client id, then add to config/constant.js
 
+5. Set up your server listening port `exports.PORT = 9527;` in config/constant.js.
+
 5. Set up your database info in config/constant.js.
 
 6. Launch server
 ```
 node server.js
 ```
+
+7. browse `http://localhost:9527` .
